@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="css/all.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<script src = "js/bootstrap.js"></script>
+	<script type="text/javascript" src="js/model.js"></script>
+	<script type="text/javascript" src="js/view.js"></script>
+	<script type="text/javascript" src="js/controller.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+	
+</head>
+<body>
+
+	<div id="wrapper">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-3 form-custom">
+					<form>
+						<div class="form-group">
+							<label for="inputName">Full name:</label>
+							<input type="text" class="form-control" id="inputName" placeholder="Jane Doe" value="">
+						</div>
+						<div class="form-group">
+							<label for="departmentName">Department:</label>
+							<select class="form-control" id="departmentName" >
+								<option></option>
+
+							</select>
+						</div>
+						<input id="save" class="btn btn-default" type="button" value="Save">
+					</form>
+				</div>
+				<div class="col-xs-12 col-sm-7 col-md-7 col-lg-8 rows">
+					<table class="table table-hover" id="table-list">
+						<tbody id="table-data">
+							<tr>
+								<th>#</th>
+								<th>Id</th>
+								<th>Full name</th>
+								<th>Department</th>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</body>
+</html>

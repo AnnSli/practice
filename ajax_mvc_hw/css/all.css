@@ -1,0 +1,57 @@
+body {
+	background: url(../images/aurora.jpg) no-repeat;
+}
+::-webkit-scrollbar {
+
+width: 0px;
+
+}
+#wrapper{
+	margin: 20px auto;
+	width: 95%;
+
+}
+.fixed {
+	position: fixed;
+	right: 5%;
+	top: 20px;
+}
+.rows,
+.form-custom {
+	padding: 20px;
+	background: #000;
+	color: #fff;
+	opacity: 0.75;
+	margin: 0 10px;	
+}
+.rows {
+	overflow-y: scroll;
+	height: 1000px;
+}
+.form-custom {
+	position: fixed;
+	right: 4%;
+	top: 20px;
+}
+
+.table-hover > tbody > tr:hover {
+    background-color: darkslategray;
+ }
+ option {
+ 	background: #ccc;
+ }
+ option:hover {
+ 	background-color: #000;
+ }
+ @media (min-width: 200px) and (max-width: 768px) { 
+	.rows {
+		margin-top: 250px;
+	}
+	.form-custom {
+		right: 20px;
+		width: 90%;
+	}
+ 	
+
+
+ }
