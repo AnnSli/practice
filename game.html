@@ -5,10 +5,10 @@
 	<style>
 		body{
 			margin: 0;
-			background:linear-gradient(#bbb, transparent 1px),
+			/* background:linear-gradient(#bbb, transparent 1px),
 			linear-gradient(90deg,#bbb, transparent 1px);
 			background-size: 30px 30px;
-			background-position: center center;
+			background-position: center center; */
 		}
 		#wrapper{
 			margin: 0;
@@ -27,10 +27,12 @@
 		td:hover{
 			background: #CCCCA0;
 		}
-		.hide{
+		div[data-visibility='hide'],
+		td[data-visibility='hide']{
 			visibility: hidden;
 		}
-		.show{
+		div[data-visibility='show'],
+		td[data-visibility='show']{
 			visibility: visible;
 		}
 	</style>
@@ -41,59 +43,55 @@
 	</div>
 
 	<script>
-		var div = document.getElementById('wrapper');
-		var table = document.createElement('table');
-		var flag = false;
-		for (var i = 0; i < 6; i++) {
-			var tr = document.createElement('tr');
-			for (var j = 0; j < 6; j++){
-				var td = document.createElement('td');
-				var randomNumber = Math.ceil(Math.random() * 9);
-				var divTd = document.createElement('div');
-				divTd.innerText = randomNumber;
-				td.appendChild(divTd);
-				tr.appendChild(td);
-				divTd.className = "hide";
+		(function(){
+			var div = document.getElementById('wrapper');
+			var table = document.createElement('table');
+			var flag = false;
+			for (var i = 0; i < 6; i++) {
+				var tr = document.createElement('tr');
+				for (var j = 0; j < 6; j++){
+					var td = document.createElement('td');
+					var randomNumber = Math.ceil(Math.random() * 9);
+					var divTd = document.createElement('div');
+					divTd.innerText = randomNumber;
+					td.appendChild(divTd);
+					tr.appendChild(td);
+					divTd.dataset.visibility = "hide";
+				}
+				table.appendChild(tr);
 			}
-			table.appendChild(tr);
-		}
-		div.appendChild(table);
-		var value1 = null;
-		var value2 = null;
-		table.addEventListener("click", function(event){
-			if(event.target !== table && !flag){
-				event.target.firstChild.className = "show";
-				if (value1 === null){
-					value1 = event.target.firstChild.innerHTML;
-				} else {
-					value2 = event.target.firstChild.innerHTML;
-					if (value1 === value2){
-						flag = true;
-						setTimeout(function(){
-							var allShow1 = document.getElementsByClassName('show');
-							allShow1[0].parentNode.className = "hide";
-							allShow1[1].parentNode.className = "hide";
-							allShow1[0].className = "hide";
-							allShow1[0].className = "hide";
-							value1 = null;
-							value2 = null;
-							flag = false;
-						}, 500);
-					} else {
-						flag = true;
-						setTimeout( function(){
-							var allShow = document.getElementsByClassName('show');
-							allShow[0].className = "hide";
-							allShow[0].className = "hide";
-							value1 = null;
-							value2 = null;
-							flag = false;
-						}, 1500);
+			div.appendChild(table);
+			var value1 = null;
+			var value2 = null;
+			var hideFunc = function(parenthide) {
+				var allShow = document.querySelectorAll('div[data-visibility="show"]');
+				for (var i = 0; i < allShow.length; i++){
+					allShow[i].dataset.visibility = "hide";
+					if (parenthide){
+						allShow[i].parentNode.dataset.visibility = "hide";
 					}
 				}
-			} 
-		}, false);
-
+				flag = false;
+			};
+			table.addEventListener("click", function(event){
+				if(event.target !== table && !flag){
+					event.target.firstElementChild.dataset.visibility = "show";
+					if (value1 === null){
+						value1 = event.target.firstElementChild.innerText;
+					} else {
+						value2 = event.target.firstElementChild.innerText;
+						flag = true;
+						if (value1 === value2){
+							setTimeout(hideFunc, 500, true);
+						} else {
+							setTimeout(hideFunc, 500, false);
+						}
+						value1 = null;
+						value2 = null;
+					}
+				} 
+			}, false);
+		})();
 	</script>
 </body>
 </html>
